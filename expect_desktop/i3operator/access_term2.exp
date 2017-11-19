@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+spawn ssh jcasey@access
+
+interact {
+    \r   { send "\r"; return }
+}
+
+expect "jcasey@access"
+send "sudo su - pdaq\r";
+
+expect "pdaq@access"
+send "\014"
+
+interact 

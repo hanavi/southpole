@@ -1,0 +1,8 @@
+#!/usr/bin/expect
+
+spawn bash -l
+
+expect "jcasey"
+send "/home/jcasey/files/scripts/pingloop\r";
+
+interact
