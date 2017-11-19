@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cal -h && echo && date && hometime && date -u

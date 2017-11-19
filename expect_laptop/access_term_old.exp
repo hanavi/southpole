@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+set password [lindex $argv 0]
+spawn ssh ckrueger@access
+
+expect "Password:"
+send "$password\r"
+
+expect "ckrueger@access"
+send "sudo su - pdaq\r";
+
+expect "pdaq@access"
+send "\014"
+
+interact 

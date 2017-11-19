@@ -1,0 +1,1 @@
+set password [exec gpg -d /home/jcasey/.pdaqpasswd 2>/dev/null]

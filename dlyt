@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+import sys
+import gnupg
+import datetime
+import subprocess
+import shutil
+
+ldir = "/home/james/Dropbox/xfer/youtube/dllist"
+
+def make_files(url):
+    """ Fuck you guys """
+
+    now = datetime.datetime.now()
+    tsec = now.hour*60*60 + now.minute*60*now.second
+    nfname = "{}/file.{}_{:02d}_{:02d}_{}.dl".format(
+        ldir,now.year,now.month, now.day,tsec)
+    gpg = gnupg.GPG(gnupghome="/home/james/.gnupg")
+
+    fd = open(nfname,"w")
+    fd.writelines("{}\n".format(url))
+    fd.close()
+
+    subprocess.call(["/usr/bin/gpg2","--default-key","07436D570209D4AE",
+                     "--detach-sign", "-a", nfname])
+
+if __name__ == "__main__":
+    url = sys.argv[1]
+    make_files(url)

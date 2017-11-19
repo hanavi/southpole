@@ -1,0 +1,14 @@
+#!/usr/bin/expect
+
+#set password [exec gpg -d /home/jcasey/.pdaqpasswd 2>/dev/null]
+set password "password"
+
+spawn ssh pdaq@expcont
+
+expect "Password"
+send "$password\r";
+
+expect "pdaq@expcont"
+send "\014"
+
+interact

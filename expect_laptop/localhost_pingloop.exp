@@ -1,0 +1,8 @@
+#!/usr/bin/expect
+
+spawn bash -l
+
+expect "ckrueger"
+send "./ping_loop.pl\r";
+
+interact

@@ -1,0 +1,33 @@
+#!/usr/bin/perl -w
+
+use strict;
+use POSIX;
+
+#-------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
+sub ping {
+#-------------------------------------------------------------------------------
+
+    my @output = qx(ping -c 10 -i 0.3 -W 5 8.8.4.4);
+
+    my ($total, $recv, $min, $avg, $max, $dev) = (0) x 6;
+
+    for my $line (@output) {
+        $total = $1 if $line =~ m/^(\d+) packets transmitted/;
+        $recv  = $1 if $line =~ m/(\d+) received/;
+        ($min, $avg, $max, $dev) = ($1, $2, $3, $4)
+            if $line =~ m#([\d.]+)/([\d.]+)/([\d.]+)/([\d.]+)#;
+    }
+
+    print strftime("%H:%M:%S -- ", localtime);
+    printf("%d, %2d, %4d, %4d, %4d, %4d\n",
+        $total, $recv, $min, $avg, $max, $dev);
+
+}
+
+
+while (1) {
+    ping;
+    sleep(20);
+}
+

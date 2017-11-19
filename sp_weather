@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+def get_weather():
+    filename = "/home/james/weather/weather.log"
+    fd = open(filename)
+    data = fd.readlines()
+    return data[-1].strip()
+
+
+if __name__ == "__main__":
+    print(get_weather())
+

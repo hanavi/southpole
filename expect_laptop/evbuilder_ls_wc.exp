@@ -1,0 +1,14 @@
+#!/usr/bin/expect
+
+#set password [exec gpg -d /home/jcasey/.pdaqpasswd 2>/dev/null]
+set password "password"
+
+spawn ssh pdaq@evbuilder
+
+expect "Password"
+send "$password\r";
+
+expect "pdaq@expcont"
+send "watch -n2 'ls -tr /mnt/data/pdaqlocal 2>/dev/null | grep \"^physics\" | wc -l'\r"
+
+interact

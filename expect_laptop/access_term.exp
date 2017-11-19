@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+
+spawn ssh jcasey@access
+
+expect "jcasey@access"
+send "sudo su - pdaq\r";
+send "clear\r"
+
+interact
